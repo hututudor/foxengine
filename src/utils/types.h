@@ -16,3 +16,5 @@ typedef float f32;
 typedef double f64;
 
 typedef bool b8;
+
+typedef const char *str;

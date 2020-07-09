@@ -1,6 +1,6 @@
 #pragma once
 
-#include <cstdint>
+#include <stdint.h>
 
 typedef int8_t i8;
 typedef int16_t i16;
@@ -17,4 +17,5 @@ typedef double f64;
 
 typedef bool b8;
 
-typedef const char *str;
+typedef char *str;
+typedef const char *cstr;

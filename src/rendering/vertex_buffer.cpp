@@ -1,4 +1,5 @@
 #include "vertex_buffer.h"
+#include "shader.h"
 #include <glad/glad.h>
 
 u32 quadVBO;
@@ -23,7 +24,10 @@ void createQuadRenderer() {
   }
 }
 
-void renderQuad(v2 position, Color color) {
+void renderQuad(u32 shader, v2 position, Color color) {
+  setUniformColor(shader, "color", color);
+  setUniformV2(shader, "position", position);
+
   glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
   glDrawArrays(GL_TRIANGLES, 0, 6);
 }

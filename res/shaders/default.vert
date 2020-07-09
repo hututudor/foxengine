@@ -1,6 +1,13 @@
 #version 330 core
 layout (location = 0) in vec2 pos;
 
+uniform vec4 color;
+uniform vec2 position;
+out vec4 PixelColor;
+
 void main() {
-  gl_Position = vec4(pos.x, pos.y, 1.0, 1.0);
+  vec2 finalposition = pos + position;
+
+  gl_Position = vec4(finalposition, 1.0, 1.0);
+  PixelColor = color;
 }

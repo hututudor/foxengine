@@ -19,15 +19,14 @@ void initRenderer() {
 }
 
 void updateRenderer() {
-  Color color = {0.1, 0.4, 0.3, 1.0};
-
   clearRenderBuffers();
-  fillBufferWithColor(color);
+  fillBufferWithColor({0.1, 0.4, 0.3, 1.0});
 
   useShader(defaultShader);
   bindGlobalVertexArray();
-  renderQuad({0, 0}, {0.5, 0, 1, 1});
-  renderQuad({0.2, 0.1}, {0.5, 0, 1, 1});
+  renderQuad(defaultShader, {0, 0}, {0.5, 0, 0.2, 1});
+  renderQuad(defaultShader, {0.2, -0.3}, {0.7, 0.4, 0.2, 1});
+  renderQuad(defaultShader, {0.4, 0.1}, {0.4, 0.2, 0.5, 1});
 }
 
 void destroyRenderer() {

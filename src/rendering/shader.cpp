@@ -40,6 +40,20 @@ void useShader(u32 index) {
   glUseProgram(index);
 }
 
+void setUniformColor(u32 index, cstr name, Color color) {
+  i32 location = glGetUniformLocation(index, name);
+  if(location != -1) {
+    glUniform4f(location, color.r, color.g, color.b, color.a);
+  }
+}
+
+void setUniformV2(u32 index, cstr name, v2 vec) {
+  i32 location = glGetUniformLocation(index, name);
+  if(location != -1) {
+    glUniform2f(location, vec.x, vec.y);
+  }
+}
+
 static void checkShaderCompilation(u32 shaderId, cstr type) {
   i32 success;
   char infoLog[1024];

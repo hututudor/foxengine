@@ -8,7 +8,7 @@ u32 loadShader(cstr vertexPath, cstr fragmentPath) {
   str vertexCode = loadFile(vertexPath);
   str fragmentCode = loadFile(fragmentPath);
 
-  if(!vertexCode || !fragmentCode) {
+  if (!vertexCode || !fragmentCode) {
     return -1;
   }
 
@@ -42,15 +42,22 @@ void useShader(u32 index) {
 
 void setUniformColor(u32 index, cstr name, Color color) {
   i32 location = glGetUniformLocation(index, name);
-  if(location != -1) {
+  if (location != -1) {
     glUniform4f(location, color.r, color.g, color.b, color.a);
   }
 }
 
 void setUniformV2(u32 index, cstr name, v2 vec) {
   i32 location = glGetUniformLocation(index, name);
-  if(location != -1) {
+  if (location != -1) {
     glUniform2f(location, vec.x, vec.y);
+  }
+}
+
+void setUniformV3(u32 index, cstr name, v3 vec) {
+  i32 location = glGetUniformLocation(index, name);
+  if (location != -1) {
+    glUniform3f(location, vec.x, vec.y, vec.z);
   }
 }
 
@@ -60,7 +67,7 @@ static void checkShaderCompilation(u32 shaderId, cstr type) {
 
   glGetShaderiv(shaderId, GL_COMPILE_STATUS, &success);
 
-  if (!success){
+  if (!success) {
     glGetShaderInfoLog(shaderId, 1024, NULL, infoLog);
     printf("ERROR::SHADER_COMPILATION_ERROR of type: %s\n%s\n", type, infoLog);
   }
@@ -72,7 +79,7 @@ void checkProgramCompilation(u32 programId) {
 
   glGetProgramiv(programId, GL_LINK_STATUS, &success);
 
-  if (!success){
+  if (!success) {
     glGetProgramInfoLog(programId, 1024, NULL, infoLog);
     printf("ERROR::PROGRAM_LINKING_ERROR of type: PROGRAM\n%s\n", infoLog);
   }

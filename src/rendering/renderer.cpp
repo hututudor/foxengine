@@ -13,20 +13,25 @@ void initRenderer() {
 
   defaultShader = loadShader("../res/shaders/default.vert", "../res/shaders/default.frag");
 
-  if(defaultShader == -1) {
+  if (defaultShader == -1) {
     printf("COULD NOT LOAD DEFAULT SHADER");
   }
+
+  glEnable(GL_DEPTH_TEST);
 }
 
 void updateRenderer() {
   clearRenderBuffers();
   fillBufferWithColor({0.1, 0.4, 0.3, 1.0});
 
+  static v2 pos = {0.0, 0.0};
+  pos = addV2(pos, {0.00005, 0.00001});
+
   useShader(defaultShader);
   bindGlobalVertexArray();
-  renderQuad(defaultShader, {0, 0}, {0.5, 0, 0.2, 1});
-  renderQuad(defaultShader, {0.2, -0.3}, {0.7, 0.4, 0.2, 1});
-  renderQuad(defaultShader, {0.4, 0.1}, {0.4, 0.2, 0.5, 1});
+  renderQuad(defaultShader, pos, {0.5, 0, 0.2, 1});
+//  renderQuad(defaultShader, {0.2, -0.3, 0.1}, {0.7, 0.4, 0.2, 1});
+//  renderQuad(defaultShader, {0.4, 0.1, 0.5}, {0.4, 0.2, 0.5, 1});
 }
 
 void destroyRenderer() {

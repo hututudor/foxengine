@@ -24,14 +24,26 @@ void createQuadRenderer() {
   }
 }
 
-void renderQuad(u32 shader, v2 position, Color color) {
+void renderQuad(u32 shader, v3 position, Color color) {
   setUniformColor(shader, "color", color);
-  setUniformV2(shader, "position", position);
+  setUniformV3(shader, "position", position);
 
   glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
   glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
+
+void renderQuad(u32 shader, v2 position, Color color) {
+  renderQuad(shader, v2ToV3(position), color);
+}
+
+void renderQuad(u32 shader, v3 position) {
+  renderQuad(shader, position, {1, 1, 1, 1});
+}
+
+void renderQuad(u32 shader, v2 position) {
+  renderQuad(shader, position, {1, 1, 1, 1});
+}
 
 void destroyQuadRenderer() {
   if (quadVBO) {

@@ -37,3 +37,7 @@ v2 normalizeV2(v2 a) {
 f32 dotV2(v2 a, v2 b) {
   return a.x * b.x + a.y * b.y;
 }
+
+v2 v3ToV2(v3 a) {
+  return v2({a.x, a.y});
+}

@@ -8,4 +8,5 @@
 
 #include "math/v2.h"
 #include "math/v3.h"
+#include "math/mat3.h"
 #include "math/color.h"

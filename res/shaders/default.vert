@@ -2,12 +2,10 @@
 layout (location = 0) in vec2 pos;
 
 uniform vec4 color;
-uniform vec3 position;
+uniform mat4 mvp;
 out vec4 PixelColor;
 
 void main() {
-  vec3 finalPosition = vec3(pos, 0.0) + position;
-
-  gl_Position = vec4(finalPosition, 1.0);
+  gl_Position = mvp * vec4(pos, 1.0, 1.0);
   PixelColor = color;
 }

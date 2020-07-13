@@ -24,25 +24,23 @@ void createQuadRenderer() {
   }
 }
 
-void renderQuad(u32 shader, v3 position, Color color) {
+void renderQuad(u32 shader, Color color, glm::vec3 position, glm::vec2 scale, f32 rotation) {
+  glm::mat4 projection = glm::ortho(0.0, 1024.0, 0.0, 720.0, -100.0, 100.0);
+  glm::mat4 view = glm::translate(glm::mat4(1.0f), -glm::vec3(-100, 0, 0));
+  glm::mat4 model = glm::translate(glm::mat4(1.0f), position);
+  model = glm::rotate(model, glm::radians(rotation), glm::vec3(0.0, 0.0, 1.0));
+  model = glm::scale(model, glm::vec3(scale.x, scale.y, 1.0));
+  glm::mat4 mvp = projection * view * model;
+
   setUniformColor(shader, "color", color);
-  setUniformV3(shader, "position", position);
+  setUniformMat4(shader, "mvp", mvp);
 
   glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
   glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
-
-void renderQuad(u32 shader, v2 position, Color color) {
-  renderQuad(shader, v2ToV3(position), color);
-}
-
-void renderQuad(u32 shader, v3 position) {
-  renderQuad(shader, position, {1, 1, 1, 1});
-}
-
-void renderQuad(u32 shader, v2 position) {
-  renderQuad(shader, position, {1, 1, 1, 1});
+void renderQuad(u32 shader) {
+  renderQuad(shader, {1, 1, 1, 1}, glm::vec3(0, 0, 0), glm::vec2(1, 1), 0);
 }
 
 void destroyQuadRenderer() {

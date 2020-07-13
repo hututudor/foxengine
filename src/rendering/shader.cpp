@@ -47,17 +47,24 @@ void setUniformColor(u32 index, cstr name, Color color) {
   }
 }
 
-void setUniformV2(u32 index, cstr name, v2 vec) {
+void setUniformV2(u32 index, cstr name, glm::vec2 vec) {
   i32 location = glGetUniformLocation(index, name);
   if (location != -1) {
     glUniform2f(location, vec.x, vec.y);
   }
 }
 
-void setUniformV3(u32 index, cstr name, v3 vec) {
+void setUniformV3(u32 index, cstr name, glm::vec3 vec) {
   i32 location = glGetUniformLocation(index, name);
   if (location != -1) {
     glUniform3f(location, vec.x, vec.y, vec.z);
+  }
+}
+
+void setUniformMat4(u32 index, cstr name, glm::mat4 mat) {
+  i32 location = glGetUniformLocation(index, name);
+  if(location != -1) {
+    glUniformMatrix4fv(location, 1, GL_FALSE, &mat[0][0]);
   }
 }
 

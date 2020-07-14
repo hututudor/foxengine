@@ -40,13 +40,6 @@ void useShader(u32 index) {
   glUseProgram(index);
 }
 
-void setUniformColor(u32 index, cstr name, Color color) {
-  i32 location = glGetUniformLocation(index, name);
-  if (location != -1) {
-    glUniform4f(location, color.r, color.g, color.b, color.a);
-  }
-}
-
 void setUniformV2(u32 index, cstr name, glm::vec2 vec) {
   i32 location = glGetUniformLocation(index, name);
   if (location != -1) {
@@ -58,6 +51,13 @@ void setUniformV3(u32 index, cstr name, glm::vec3 vec) {
   i32 location = glGetUniformLocation(index, name);
   if (location != -1) {
     glUniform3f(location, vec.x, vec.y, vec.z);
+  }
+}
+
+void setUniformV4(u32 index, cstr name, glm::vec4 vec) {
+  i32 location = glGetUniformLocation(index, name);
+  if (location != -1) {
+    glUniform4f(location, vec.x, vec.y, vec.z, vec.w);
   }
 }
 

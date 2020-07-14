@@ -7,4 +7,4 @@ void updateRenderer();
 void destroyRenderer();
 
 void clearRenderBuffers();
-void fillBufferWithColor(const Color &color);
+void fillBufferWithColor(const glm::vec4 &color);

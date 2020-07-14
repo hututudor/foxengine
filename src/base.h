@@ -6,8 +6,6 @@
 #include "utils/types.h"
 #include "utils/file.h"
 
-#include "utils/color.h"
-
 #include <glm/vec3.hpp>
 #include <glm/vec2.hpp>
 #include <glm/vec4.hpp>

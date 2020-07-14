@@ -31,7 +31,7 @@ void updateRenderer() {
   bindGlobalVertexArray();
   renderQuad(defaultShader, {0.5, 0, 0.2, 1}, glm::vec3(100.0, 100.0, 10.0), glm::vec2(50.0, 50.0), ang);
   renderQuad(defaultShader, {0.7, 0.4, 0.2, 1}, glm::vec3(120.0, 110.0, 1.0), glm::vec2(50.0, 50.0), ang + 25);
-//  renderQuad(defaultShader, {0.4, 0.2, 0.5, 1}, glm::vec3(150.0, 180.0, 12.0), glm::vec2(50.0, 50.0), ang - 25);
+  renderQuad(defaultShader, {0.4, 0.2, 0.5, 1}, glm::vec3(150.0, 180.0, 12.0), glm::vec2(50.0, 50.0), ang - 25);
 //  renderQuad(defaultShader, {0.7, 0.4, 0.2, 1});
 //  renderQuad(defaultShader, {0.4, 0.2, 0.5, 1});
 }

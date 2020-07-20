@@ -37,6 +37,9 @@ void updateRenderer() {
     auto &transform = world.get<Transform>(entity);
     auto &color = world.get<Color>(entity);
 
+    printf("%f, %f, %f, %f, %f, %d\n", transform.position.x, transform.position.y, transform.rotation,
+           transform.scale.x, transform.scale.y, transform.layer);
+
     renderQuad(defaultShader, color.color, glm::vec3(transform.position, transform.layer),
                transform.scale, transform.rotation);
   }

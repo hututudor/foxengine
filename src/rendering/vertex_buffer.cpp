@@ -1,5 +1,6 @@
 #include "vertex_buffer.h"
 #include "../resources/shader.h"
+#include "../config/engine_config.h"
 #include <glad/glad.h>
 
 u32 quadVBO;
@@ -25,7 +26,7 @@ void createQuadRenderer() {
 }
 
 void renderQuad(const std::string &shaderName, glm::vec4 color, glm::vec3 position, glm::vec2 scale, f32 rotation) {
-  glm::mat4 projection = glm::ortho(0.0, 1024.0, 0.0, 720.0, -100.0, 100.0);
+  glm::mat4 projection = glm::ortho(0.0, (f64)engineConfig.windowWidth, 0.0, (f64)engineConfig.windowHeight, -100.0, 100.0);
   glm::mat4 view = glm::translate(glm::mat4(1.0f), -glm::vec3(-100, 0, 0));
   glm::mat4 model = glm::translate(glm::mat4(1.0f), position);
   model = glm::rotate(model, glm::radians(rotation), glm::vec3(0.0, 0.0, 1.0));

@@ -4,15 +4,20 @@
 #include "../parser/config.h"
 #include "../resources/loader.h"
 #include "../ecs/world.h"
+#include "../utils/timing.h"
+#include "../config/engine_config.h"
 
 i32 main() {
-  if (!createWindow(1024, 720, "Fox Engine", false)) {
+  loadConfigFile();
+
+  if (!createWindow(engineConfig.windowWidth, engineConfig.windowHeight, engineConfig.windowTitle.c_str(),
+                    engineConfig.fullscreen)) {
     return -1;
   }
 
   initRenderer();
-  loadConfigFile();
   loadResources();
+  initDeltaTime();
 
   entt::entity orangeObj = world.create();
   auto &orangeTransform = world.emplace<Transform>(orangeObj);
@@ -31,6 +36,8 @@ i32 main() {
   greenColor.color = glm::vec4(0.0f, 1.0f, 0.0f, 1.0f);
 
   while (isWindowRunning()) {
+    updateDeltaTime();
+//    printf("FPS: %d\n", (i32)(1 / getDeltaTime()));
     updateRenderer();
 
     pollWindowEvents();

@@ -13,7 +13,13 @@ b8 createWindow(u32 width, u32 height, cstr title, b8 fullscreen) {
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 
-  window = glfwCreateWindow(width, height, title, nullptr, nullptr);
+  GLFWmonitor* monitor = nullptr;
+
+  if(fullscreen) {
+    monitor = glfwGetPrimaryMonitor();
+  }
+
+  window = glfwCreateWindow(width, height, title, monitor, nullptr);
   if(!window) {
     glfwTerminate();
     return false;

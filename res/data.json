@@ -3,7 +3,7 @@
     {
       "name": "default",
       "vertex": "shaders/default.vert",
-      "fragment": "shader/default.frag"
+      "fragment": "shaders/default.frag"
     }
   ]
 }

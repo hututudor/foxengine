@@ -10,10 +10,6 @@ void initRenderer() {
   bindGlobalVertexArray();
   createQuadRenderer();
 
-  if (!loadShader("default", "../res/shaders/default.frag", "../res/shaders/default.vert")) {
-    printf("COULD NOT LOAD DEFAULT SHADER");
-  }
-
   glEnable(GL_DEPTH_TEST);
 }
 
@@ -36,10 +32,6 @@ void updateRenderer() {
     renderQuad("default", color.color, glm::vec3(transform.position, transform.layer),
                transform.scale, transform.rotation);
   }
-
-//  renderQuad(defaultShader, glm::vec4(0.5, 0, 0.2, 1.0), glm::vec3(100.0, 100.0, 10.0), glm::vec2(50.0, 50.0), ang);
-//  renderQuad(defaultShader, glm::vec4(0.7, 0.4, 0.2, 1), glm::vec3(120.0, 110.0, 1.0), glm::vec2(50.0, 50.0), ang + 25);
-//  renderQuad(defaultShader, glm::vec4(0.4, 0.2, 0.5, 1), glm::vec3(150.0, 180.0, 12.0), glm::vec2(50.0, 50.0), ang - 25);
 }
 
 void destroyRenderer() {

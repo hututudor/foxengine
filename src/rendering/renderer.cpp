@@ -1,20 +1,16 @@
 #include "renderer.h"
 #include "vertex_array.h"
 #include "vertex_buffer.h"
-#include "shader.h"
+#include "../resources/shader.h"
 #include "../ecs/world.h"
 #include <glad/glad.h>
-
-u32 defaultShader;
 
 void initRenderer() {
   createGlobalVertexArray();
   bindGlobalVertexArray();
   createQuadRenderer();
 
-  defaultShader = loadShader("../res/shaders/default.vert", "../res/shaders/default.frag");
-
-  if (defaultShader == -1) {
+  if (!loadShader("default", "../res/shaders/default.frag", "../res/shaders/default.vert")) {
     printf("COULD NOT LOAD DEFAULT SHADER");
   }
 
@@ -28,7 +24,7 @@ void updateRenderer() {
   static f32 ang = 0;
   ang += 1;
 
-  useShader(defaultShader);
+  useShader("default");
   bindGlobalVertexArray();
 
   auto view = world.view<Color>();
@@ -37,7 +33,7 @@ void updateRenderer() {
     auto &transform = world.get<Transform>(entity);
     auto &color = world.get<Color>(entity);
 
-    renderQuad(defaultShader, color.color, glm::vec3(transform.position, transform.layer),
+    renderQuad("default", color.color, glm::vec3(transform.position, transform.layer),
                transform.scale, transform.rotation);
   }
 

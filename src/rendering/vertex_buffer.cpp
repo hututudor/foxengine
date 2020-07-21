@@ -1,5 +1,5 @@
 #include "vertex_buffer.h"
-#include "shader.h"
+#include "../resources/shader.h"
 #include <glad/glad.h>
 
 u32 quadVBO;
@@ -24,7 +24,7 @@ void createQuadRenderer() {
   }
 }
 
-void renderQuad(u32 shader, glm::vec4 color, glm::vec3 position, glm::vec2 scale, f32 rotation) {
+void renderQuad(const std::string &shaderName, glm::vec4 color, glm::vec3 position, glm::vec2 scale, f32 rotation) {
   glm::mat4 projection = glm::ortho(0.0, 1024.0, 0.0, 720.0, -100.0, 100.0);
   glm::mat4 view = glm::translate(glm::mat4(1.0f), -glm::vec3(-100, 0, 0));
   glm::mat4 model = glm::translate(glm::mat4(1.0f), position);
@@ -32,15 +32,15 @@ void renderQuad(u32 shader, glm::vec4 color, glm::vec3 position, glm::vec2 scale
   model = glm::scale(model, glm::vec3(scale.x, scale.y, 1.0));
   glm::mat4 mvp = projection * view * model;
 
-  setUniformV4(shader, "color", color);
-  setUniformMat4(shader, "mvp", mvp);
+  setShaderUniformV4(shaderName, "color", color);
+  setShaderUniformMat4(shaderName, "mvp", mvp);
 
   glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
   glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
-void renderQuad(u32 shader) {
-  renderQuad(shader, {1, 1, 1, 1}, glm::vec3(0, 0, 0), glm::vec2(1, 1), 0);
+void renderQuad(const std::string &shaderName) {
+  renderQuad(shaderName, {1, 1, 1, 1}, glm::vec3(0, 0, 0), glm::vec2(1, 1), 0);
 }
 
 void destroyQuadRenderer() {

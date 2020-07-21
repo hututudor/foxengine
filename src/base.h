@@ -2,6 +2,8 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include <string>
+#include <map>
 
 #include "utils/types.h"
 #include "utils/file.h"

@@ -5,13 +5,14 @@ project(engine)
 set(CMAKE_CXX_STANDARD 17)
 
 set(GLAD_FILES deps/glad/src/glad.c)
-set(ENGINE_FILES src/utils/types.h src/window/window.cpp src/window/window.h src/rendering/renderer.cpp src/rendering/renderer.h src/rendering/vertex_array.cpp src/rendering/vertex_array.h src/rendering/vertex_buffer.cpp src/rendering/vertex_buffer.h src/rendering/shader.cpp src/rendering/shader.h src/utils/file.cpp src/utils/file.h src/ecs/world.cpp src/ecs/world.h src/ecs/component.h src/ecs/transform.h src/ecs/color.h)
+set(ENGINE_FILES src/utils/types.h src/window/window.cpp src/window/window.h src/rendering/renderer.cpp src/rendering/renderer.h src/rendering/vertex_array.cpp src/rendering/vertex_array.h src/rendering/vertex_buffer.cpp src/rendering/vertex_buffer.h src/rendering/shader.cpp src/rendering/shader.h src/utils/file.cpp src/utils/file.h src/ecs/world.cpp src/ecs/world.h src/ecs/component.h src/ecs/transform.h src/ecs/color.h src/parser/config.cpp src/parser/config.h)
 set(RUNTIME_FILES src/runtime/main.cpp)
 
 add_subdirectory(deps/glfw)
 add_subdirectory(deps/glm)
 include_directories(deps/glad/include)
 include_directories(deps/entt/include)
+include_directories(deps/json/include)
 
 add_library(engine STATIC "${ENGINE_FILES}" "${GLAD_FILES}")
 add_executable(runtime "${RUNTIME_FILES}")

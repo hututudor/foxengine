@@ -39,6 +39,8 @@ i32 main() {
     updateDeltaTime();
     updateRenderer();
 
+    greenTransform.position.x += getDeltaTime() * 100;
+
     pollWindowEvents();
     swapWindowBuffers();
   }

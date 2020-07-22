@@ -5,7 +5,7 @@
 
 GLFWwindow* window;
 
-b8 createWindow(u32 width, u32 height, cstr title, b8 fullscreen) {
+b8 createWindow(u32 width, u32 height, cstr title, b8 fullscreen, b8 vSync) {
   if(!glfwInit()) {
     return false;
   }
@@ -26,6 +26,7 @@ b8 createWindow(u32 width, u32 height, cstr title, b8 fullscreen) {
   }
 
   glfwMakeContextCurrent(window);
+  setVSync(vSync);
 
   if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
     return 0;
@@ -48,4 +49,8 @@ void pollWindowEvents() {
 
 void swapWindowBuffers() {
   glfwSwapBuffers(window);
+}
+
+void setVSync(b8 enabled) {
+  glfwSwapInterval(enabled);
 }

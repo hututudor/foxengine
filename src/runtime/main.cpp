@@ -11,7 +11,7 @@ i32 main() {
   loadConfigFile();
 
   if (!createWindow(engineConfig.windowWidth, engineConfig.windowHeight, engineConfig.windowTitle.c_str(),
-                    engineConfig.fullscreen)) {
+                    engineConfig.fullscreen, engineConfig.vSync)) {
     return -1;
   }
 

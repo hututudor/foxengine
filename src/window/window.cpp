@@ -1,7 +1,6 @@
-#include "window.h"
-
 #include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include "window.h"
+#include "../config/engine_config.h"
 
 GLFWwindow* window;
 
@@ -28,6 +27,8 @@ b8 createWindow(u32 width, u32 height, cstr title, b8 fullscreen, b8 vSync) {
   glfwMakeContextCurrent(window);
   setVSync(vSync);
 
+  glfwSetWindowSizeCallback(window, windowSizeCallback);
+
   if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
     return 0;
   }
@@ -53,4 +54,11 @@ void swapWindowBuffers() {
 
 void setVSync(b8 enabled) {
   glfwSwapInterval(enabled);
+}
+
+void windowSizeCallback(GLFWwindow *win, i32 width, i32 height) {
+  engineConfig.windowWidth = width;
+  engineConfig.windowHeight = height;
+
+  glViewport(0, 0, width, height);
 }

@@ -37,7 +37,6 @@ i32 main() {
 
   while (isWindowRunning()) {
     updateDeltaTime();
-//    printf("FPS: %d\n", (i32)(1 / getDeltaTime()));
     updateRenderer();
 
     pollWindowEvents();

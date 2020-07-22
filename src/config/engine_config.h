@@ -11,6 +11,8 @@ struct EngineConfig {
   b8 displayFramesPerSecond = false;
   b8 fullscreen = false;
   b8 vSync = false;
+
+  std::string defaultScene = "default";
 };
 
 extern EngineConfig engineConfig;

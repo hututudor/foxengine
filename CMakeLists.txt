@@ -5,7 +5,7 @@ project(engine)
 set(CMAKE_CXX_STANDARD 17)
 
 set(GLAD_FILES deps/glad/src/glad.c)
-set(ENGINE_FILES src/utils/types.h src/window/window.cpp src/window/window.h src/rendering/renderer.cpp src/rendering/renderer.h src/rendering/vertex_array.cpp src/rendering/vertex_array.h src/rendering/vertex_buffer.cpp src/rendering/vertex_buffer.h src/utils/file.cpp src/utils/file.h src/ecs/world.cpp src/ecs/world.h src/ecs/component.h src/ecs/transform.h src/ecs/color.h src/parser/config.cpp src/parser/config.h src/config/engine_config.h src/config/engine_config.cpp src/resources/shader.cpp src/resources/shader.h src/resources/loader.cpp src/resources/loader.h src/utils/timing.cpp src/utils/timing.h)
+set(ENGINE_FILES src/utils/types.h src/window/window.cpp src/window/window.h src/rendering/renderer.cpp src/rendering/renderer.h src/rendering/vertex_array.cpp src/rendering/vertex_array.h src/rendering/vertex_buffer.cpp src/rendering/vertex_buffer.h src/utils/file.cpp src/utils/file.h src/ecs/world.cpp src/ecs/world.h src/ecs/component.h src/ecs/transform.h src/ecs/color.h src/parser/config.cpp src/parser/config.h src/config/engine_config.h src/config/engine_config.cpp src/resources/shader.cpp src/resources/shader.h src/resources/loader.cpp src/resources/loader.h src/utils/timing.cpp src/utils/timing.h src/resources/scene.cpp src/resources/scene.h)
 set(RUNTIME_FILES src/runtime/main.cpp)
 
 add_subdirectory(deps/glfw)

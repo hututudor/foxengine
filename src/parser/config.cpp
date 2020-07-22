@@ -17,6 +17,8 @@ void loadConfigFile() {
       engineConfig.displayFramesPerSecond = configJson.value("displayFramesPerSecond", engineConfig.displayFramesPerSecond);
       engineConfig.fullscreen = configJson.value("fullscreen", engineConfig.fullscreen);
       engineConfig.vSync = configJson.value("vSync", engineConfig.vSync);
+
+      engineConfig.defaultScene = configJson.value("defaultScene", engineConfig.defaultScene);
     } catch (nlohmann::json::exception) {
       printf("Error: Could not parse fox.json\n");
     }

@@ -15,8 +15,7 @@ Shader *getShader(const std::string &shaderName) {
 }
 
 b8 loadShader(const std::string &shaderName, const std::string &fragmentPath, const std::string &vertexPath) {
-  Shader *s = getShader(shaderName);
-  if (s) {
+  if (getShader(shaderName)) {
     return false;
   }
 
@@ -49,8 +48,6 @@ b8 loadShader(const std::string &shaderName, const std::string &fragmentPath, co
   glDeleteShader(fragmentId);
 
   Shader shader;
-  shader.fragmentPath = fragmentPath;
-  shader.vertexPath = vertexPath;
   shader.index = program;
 
   shaders[shaderName] = shader;

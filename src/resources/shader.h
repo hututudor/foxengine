@@ -4,8 +4,6 @@
 
 struct Shader {
   u32 index;
-  std::string fragmentPath;
-  std::string vertexPath;
 };
 
 Shader *getShader(const std::string &shaderName);

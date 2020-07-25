@@ -3,6 +3,7 @@
 #include <glad/glad.h>
 
 #define STB_IMAGE_IMPLEMENTATION
+
 #include <stb_image/stb_image.h>
 
 std::map<std::string, Texture> textures;
@@ -20,11 +21,9 @@ b8 addTexture(const std::string &textureName, const std::string &path) {
     return false;
   }
 
-  std::string realPath = engineConfig.dataFolder + path;
-
   Texture texture = {0};
   texture.name = textureName;
-  texture.path = realPath;
+  texture.path = path;
 
   textures[textureName] = texture;
 
@@ -64,11 +63,18 @@ b8 loadTexture(const std::string &textureName) {
 }
 
 b8 unloadTexture(const std::string &textureName) {
-  return unloadTexture(getTexture(textureName)->index);
+  Texture *texture = getTexture(textureName);
+
+  if (!texture || !texture->isLoaded) {
+    return false;
+  }
+
+  return unloadTexture(texture->index);
 }
 
 b8 unloadTexture(u32 textureIndex) {
-  return 0;
+  glDeleteTextures(1, &textureIndex);
+  return true;
 }
 
 void destroyTextures() {

@@ -29,26 +29,34 @@ void createQuadRenderer() {
   }
 }
 
-void renderQuad(const std::string &shaderName, glm::vec4 color, glm::vec3 position, glm::vec2 scale, f32 rotation) {
+void renderQuad(const std::string &shaderName, const std::string &textureName, glm::vec4 color, glm::vec3 position,
+                glm::vec2 scale, f32 rotation) {
   glm::mat4 projection = glm::ortho(0.0, (f64) engineConfig.windowWidth, 0.0, (f64) engineConfig.windowHeight, -100.0,
                                     100.0);
   glm::mat4 view = glm::translate(glm::mat4(1.0f), -glm::vec3(-100, 0, 0));
   glm::mat4 model = glm::translate(glm::mat4(1.0f), position);
-  model = glm::rotate(model, glm::radians(rotation), glm::vec3(0.0, 0.0, 1.0));
+  model = glm::rotate(model, -glm::radians(rotation), glm::vec3(0.0, 0.0, 1.0));
   model = glm::scale(model, glm::vec3(scale.x, scale.y, 1.0));
   glm::mat4 mvp = projection * view * model;
 
+  b8 hasTexture = textureName != "";
 
+  setShaderUniformBool(shaderName, "hasTexture", hasTexture);
   setShaderUniformV4(shaderName, "color", color);
   setShaderUniformMat4(shaderName, "mvp", mvp);
 
+  if (hasTexture) {
+    useTexture(textureName);
+  } else {
+    useTexture();
+  }
+
   glBindBuffer(GL_ARRAY_BUFFER, quadVBO);
-  useTexture("player");
   glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 void renderQuad(const std::string &shaderName) {
-  renderQuad(shaderName, {1, 1, 1, 1}, glm::vec3(0, 0, 0), glm::vec2(1, 1), 0);
+  renderQuad(shaderName, "", {1, 1, 1, 1}, glm::vec3(0, 0, 0), glm::vec2(1, 1), 0);
 }
 
 void destroyQuadRenderer() {

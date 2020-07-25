@@ -1,58 +1,59 @@
 {
-	"objects": [
-		{
-			"name": "green",
-			"components": [
-				{
-					"type": "transform",
-					"position": {
-						"x": 100,
-						"y": 100
-					},
-					"scale": {
-						"x": 100,
-						"y": 50
-					},
-					"rotation": 45,
-					"layer": 0
-				},
-				{
-					"type": "color",
-					"color": {
-						"r": 1,
-						"g": 0.5,
-						"b": 0,
-						"a": 1
-					}
-				}
-			]
-		},
-		{
-			"name": "orange",
-			"components": [
-				{
-					"type": "transform",
-					"position": {
-						"x": 200,
-						"y": 100
-					},
-					"scale": {
-						"x": 100,
-						"y": 50
-					},
-					"rotation": 45,
-					"layer": 0
-				},
-				{
-					"type": "color",
-					"color": {
-						"r": 0,
-						"g": 1,
-						"b": 0,
-						"a": 1
-					}
-				}
-			]
-		}
-	]
+  "objects": [
+    {
+      "name": "green",
+      "components": [
+        {
+          "type": "transform",
+          "position": {
+            "x": 100,
+            "y": 100
+          },
+          "scale": {
+            "x": 160,
+            "y": 220
+          },
+          "rotation": 0,
+          "layer": 0
+        },
+        {
+          "type": "texture",
+          "color": {
+            "r": 1,
+            "g": 0.5,
+            "b": 0,
+            "a": 1
+          },
+          "texture": "player"
+        }
+      ]
+    },
+    {
+      "name": "orange",
+      "components": [
+        {
+          "type": "transform",
+          "position": {
+            "x": 200,
+            "y": 100
+          },
+          "scale": {
+            "x": 100,
+            "y": 50
+          },
+          "rotation": 45,
+          "layer": -1
+        },
+        {
+          "type": "color",
+          "color": {
+            "r": 0,
+            "g": 1,
+            "b": 0,
+            "a": 1
+          }
+        }
+      ]
+    }
+  ]
 }

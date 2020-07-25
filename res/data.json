@@ -1,15 +1,21 @@
 {
-	"shaders": [
-		{
-			"name": "default",
-			"vertex": "shaders/default.vert",
-			"fragment": "shaders/default.frag"
-		}
-	],
-	"scenes": [
-		{
-			"name": "default",
-			"path": "scenes/default.scene.json"
-		}
-	]
+  "shaders": [
+    {
+      "name": "default",
+      "vertex": "shaders/default.vert",
+      "fragment": "shaders/default.frag"
+    }
+  ],
+  "scenes": [
+    {
+      "name": "default",
+      "path": "scenes/default.scene.json"
+    }
+  ],
+  "textures": [
+    {
+      "name": "player",
+      "path": "textures/player.png"
+    }
+  ]
 }

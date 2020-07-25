@@ -1,5 +1,6 @@
 #include "scene.h"
 #include "../ecs/world.h"
+#include "../resources/texture.h"
 #include <json/json.hpp>
 
 std::map<std::string, Scene> scenes;
@@ -36,6 +37,7 @@ void switchScene(const std::string &sceneName) {
   }
 
   world.clear();
+  destroyTextures();
 
   try {
     nlohmann::json jsonData = nlohmann::json::parse(scene->structure);
@@ -50,7 +52,7 @@ void switchScene(const std::string &sceneName) {
         std::string type = component.value("type", "transform");
 
         if (type == "transform") {
-          auto &transformComponent = world.emplace<Transform>(entity);
+          auto &transformComponent = world.emplace<TransformComponent>(entity);
 
           transformComponent.position = glm::vec2(component["position"]["x"].get<f32>(),
                                                   component["position"]["y"].get<f32>());
@@ -59,11 +61,18 @@ void switchScene(const std::string &sceneName) {
           transformComponent.rotation = component["rotation"].get<f32>();
           transformComponent.layer = component["layer"].get<f32>();
         } else if (type == "color") {
-          auto &colorComponent = world.emplace<Color>(entity);
+          auto &colorComponent = world.emplace<ColorComponent>(entity);
 
           colorComponent.color = glm::vec4(component["color"]["r"].get<f32>(), component["color"]["g"].get<f32>(),
                                            component["color"]["b"].get<f32>(), component["color"]["a"].get<f32>());
-          colorComponent.color = colorComponent.color;
+        } else if (type == "texture") {
+          auto &textureComponent = world.emplace<TextureComponent>(entity);
+
+          textureComponent.color = glm::vec4(component["color"]["r"].get<f32>(), component["color"]["g"].get<f32>(),
+                                             component["color"]["b"].get<f32>(), component["color"]["a"].get<f32>());
+          textureComponent.texture = component.value("texture", "default");
+
+          loadTexture(textureComponent.texture);
         }
       }
     }

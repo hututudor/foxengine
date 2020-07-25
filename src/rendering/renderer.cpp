@@ -2,6 +2,7 @@
 #include "vertex_array.h"
 #include "vertex_buffer.h"
 #include "../resources/shader.h"
+#include "../resources/texture.h"
 #include "../ecs/world.h"
 #include <glad/glad.h>
 
@@ -26,19 +27,27 @@ void updateRenderer() {
   fillBufferWithColor({0.1, 0.4, 0.3, 1.0});
 
   static f32 ang = 0;
-  ang += 1;
+  ang += 0.01;
 
   useShader("default");
   bindGlobalVertexArray();
 
-  auto view = world.view<Color>();
+  auto colorComponents = world.view<ColorComponent>();
+  for (auto entity: colorComponents) {
+    auto &transform = world.get<TransformComponent>(entity);
+    auto &color = world.get<ColorComponent>(entity);
 
-  for (auto entity: view) {
-    auto &transform = world.get<Transform>(entity);
-    auto &color = world.get<Color>(entity);
-
-    renderQuad("default", color.color, glm::vec3(transform.position, transform.layer),
+    renderQuad("default", "", color.color, glm::vec3(transform.position, transform.layer),
                transform.scale, transform.rotation);
+  }
+
+  auto textureComponents = world.view<TextureComponent>();
+  for (auto &entity: textureComponents) {
+    auto &transform = world.get<TransformComponent>(entity);
+    auto &texture = world.get<TextureComponent>(entity);
+
+    renderQuad("default", texture.texture, texture.color, glm::vec3(transform.position, transform.layer),
+               transform.scale, ang);
   }
 }
 

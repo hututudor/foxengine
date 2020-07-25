@@ -63,6 +63,17 @@ void useShader(const std::string &shaderName) {
   }
 }
 
+void setShaderUniformBool(const std::string &shaderName, cstr name, b8 val) {
+  Shader *shader = getShader(shaderName);
+
+  if (shader) {
+    i32 location = glGetUniformLocation(shader->index, name);
+    if (location != -1) {
+      glUniform1i(location, val);
+    }
+  }
+}
+
 void setShaderUniformV2(const std::string &shaderName, cstr name, glm::vec2 vec) {
   Shader *shader = getShader(shaderName);
 

@@ -2,6 +2,7 @@
 #include "../config/engine_config.h"
 #include "shader.h"
 #include "scene.h"
+#include "texture.h"
 #include <json/json.hpp>
 
 void loadResources() {
@@ -28,6 +29,14 @@ void loadResources() {
 
         loadScene(name, path);
       }
+
+      auto textures = resourcesJson["textures"];
+      for (auto &texture: textures) {
+        std::string name = texture.value("name", "default");
+        std::string path = engineConfig.dataFolder + texture.value("path", "");
+
+        addTexture(name, path);
+      }
     } catch (nlohmann::json::exception) {
       printf("Error: Could not parse %s\n", resourcesConfigFilePath.c_str());
     }
@@ -35,5 +44,5 @@ void loadResources() {
 }
 
 void destroyResources() {
-
+  destroyTextures();
 }

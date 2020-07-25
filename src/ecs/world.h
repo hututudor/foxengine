@@ -1,6 +1,7 @@
 #pragma once
-#include "./transform.h"
-#include "./color.h"
+#include "transform_component.h"
+#include "color_component.h"
+#include "texture_component.h"
 
 #include <entt/entt.hpp>
 

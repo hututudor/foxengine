@@ -2,7 +2,7 @@
 #include "../base.h"
 
 struct EngineConfig {
-  std::string dataFolder = ".";
+  std::string dataFolder = "./";
 
   std::string windowTitle = "Fox Engine";
   u32 windowWidth = 1024;

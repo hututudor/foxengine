@@ -1,6 +1,8 @@
 #include "texture.h"
 #include "../config/engine_config.h"
 #include <glad/glad.h>
+
+#define STB_IMAGE_IMPLEMENTATION
 #include <stb_image/stb_image.h>
 
 std::map<std::string, Texture> textures;
@@ -30,6 +32,8 @@ b8 addTexture(const std::string &textureName, const std::string &path) {
 }
 
 b8 loadTexture(const std::string &textureName) {
+  stbi_set_flip_vertically_on_load(true);
+
   Texture *texture = getTexture(textureName);
   if (!texture || texture->isLoaded) {
     return false;
@@ -39,23 +43,22 @@ b8 loadTexture(const std::string &textureName) {
   glActiveTexture(GL_TEXTURE0);
   glBindTexture(GL_TEXTURE_2D, texture->index);
 
-  char *data = loadFile(texture->path.c_str());
-  printf("%s | %d\n", texture->path.c_str(), sizeof(data));
-//  if (data) {
-//    i32 format = GL_RGBA;
-//    if (texture->channels == 3) {
-//      format = GL_RGB;
-//    }
-//
-//    glTexImage2D(GL_TEXTURE_2D, 0, format, texture->width, texture->height, 0, format, GL_UNSIGNED_BYTE, data);
-//    glGenerateMipmap(GL_TEXTURE_2D);
-//
-////    stbi_image_free(data);
-//    texture->isLoaded = true;
-//  } else {
-//    printf("ERROR: COULD NOT LOAD TEXTURE: %s\n", texture->path.c_str());
-//    return false;
-//  }
+  u8 *data = stbi_load(texture->path.c_str(), &texture->width, &texture->height, &texture->channels, 0);
+  if (data) {
+    i32 format = GL_RGBA;
+    if (texture->channels == 3) {
+      format = GL_RGB;
+    }
+
+    glTexImage2D(GL_TEXTURE_2D, 0, format, texture->width, texture->height, 0, format, GL_UNSIGNED_BYTE, data);
+    glGenerateMipmap(GL_TEXTURE_2D);
+
+    texture->isLoaded = true;
+    stbi_image_free(data);
+  } else {
+    printf("ERROR: COULD NOT LOAD TEXTURE: %s\n", texture->path.c_str());
+    return false;
+  }
 
   return true;
 }

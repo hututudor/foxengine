@@ -25,15 +25,13 @@ i32 main() {
   entt::entity orangeObj = world.create();
   auto &orangeTransform = world.emplace<Transform>(orangeObj);
   orangeTransform.position = glm::vec2(100.0, 100.0);
-  orangeTransform.scale = glm::vec2(100.0, 50.0);
-  orangeTransform.rotation = 45;
+  orangeTransform.scale = glm::vec2(80.0, 110.0);
+  orangeTransform.rotation = 0;
   auto &orangeColor = world.emplace<Color>(orangeObj);
-  orangeColor.color = glm::vec4(1.0f, 0.0f, 0.0f, 1.0f);
+  orangeColor.color = glm::vec4(1.0f, 0.5f, 0.0f, 1.0f);
 
   addTexture("player", "textures/player.png");
   loadTexture("player");
-  Texture *player = getTexture("player");
-  printf("%d, %d, %d\n", player->width, player->height, player->channels);
 
 //  entt::entity greenObj = world.create();
 //  auto &greenTransform = world.emplace<Transform>(greenObj);

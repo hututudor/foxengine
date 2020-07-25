@@ -38,6 +38,7 @@ void renderQuad(const std::string &shaderName, glm::vec4 color, glm::vec3 positi
   model = glm::scale(model, glm::vec3(scale.x, scale.y, 1.0));
   glm::mat4 mvp = projection * view * model;
 
+
   setShaderUniformV4(shaderName, "color", color);
   setShaderUniformMat4(shaderName, "mvp", mvp);
 

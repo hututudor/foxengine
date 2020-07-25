@@ -20,3 +20,4 @@ b8 unloadTexture(const std::string &textureName);
 b8 unloadTexture(u32 textureIndex);
 void destroyTextures();
 b8 useTexture(const std::string& textureName);
+b8 useTexture();

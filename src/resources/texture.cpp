@@ -85,3 +85,8 @@ b8 useTexture(const std::string &textureName) {
 
   return true;
 }
+
+b8 useTexture() {
+  glBindTexture(GL_TEXTURE_2D, 0);
+  return true;
+}

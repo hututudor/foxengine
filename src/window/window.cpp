@@ -1,25 +1,26 @@
 #include <glad/glad.h>
 #include "window.h"
 #include "../config/engine_config.h"
+#include <stb_image/stb_image.h>
 
-GLFWwindow* window;
+GLFWwindow *window;
 
 b8 createWindow(u32 width, u32 height, cstr title, b8 fullscreen, b8 vSync) {
-  if(!glfwInit()) {
+  if (!glfwInit()) {
     return false;
   }
 
   glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
   glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
 
-  GLFWmonitor* monitor = nullptr;
+  GLFWmonitor *monitor = nullptr;
 
-  if(fullscreen) {
+  if (fullscreen) {
     monitor = glfwGetPrimaryMonitor();
   }
 
   window = glfwCreateWindow(width, height, title, monitor, nullptr);
-  if(!window) {
+  if (!window) {
     glfwTerminate();
     return false;
   }
@@ -29,9 +30,14 @@ b8 createWindow(u32 width, u32 height, cstr title, b8 fullscreen, b8 vSync) {
 
   glfwSetWindowSizeCallback(window, windowSizeCallback);
 
-  if(!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
+  if (!gladLoadGLLoader((GLADloadproc) glfwGetProcAddress)) {
     return 0;
   }
+
+  GLFWimage icon[1];
+  icon[0].pixels = stbi_load((engineConfig.dataFolder + "logo.png").c_str(), &icon[0].width, &icon[0].height, 0, 4);
+  glfwSetWindowIcon(window, 1, icon);
+  stbi_image_free(icon[0].pixels);
 
   return 1;
 }

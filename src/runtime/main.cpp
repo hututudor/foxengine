@@ -1,3 +1,6 @@
+#define STB_IMAGE_IMPLEMENTATION
+#include <stb_image/stb_image.h>
+
 #include "../base.h"
 #include "../window/window.h"
 #include "../rendering/renderer.h"

@@ -1,9 +1,6 @@
 #include "texture.h"
 #include "../config/engine_config.h"
 #include <glad/glad.h>
-
-#define STB_IMAGE_IMPLEMENTATION
-
 #include <stb_image/stb_image.h>
 
 std::map<std::string, Texture> textures;
